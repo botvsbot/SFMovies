@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+
+    <title>Application Aware Analytics - {% block title %}In OpenFlow Networks{% endblock %}</title>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  
+	<style>
+      html, body, #map-canvas {
+        height: 600px;
+        margin: 50px;
+        padding: 50px
+      }
+    </style>
+
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script>
+function initialize() {
+  var myLatlng = new google.maps.LatLng(37.775, -122.419);
+  var mapOptions = {
+    zoom: 12,
+    center: myLatlng
+  }
+  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  {% if result_list %}
+     {% for result in result_list %}
+		{% if result.lat == 0 %}
+		{% else %}
+  			var markerLatLng = new google.maps.LatLng({{result.lat}},{{result.lng}});
+  			var marker_{{result.movie_id}} = new google.maps.Marker({
+      			position: markerLatLng,
+      			map: map,
+      			title: "{{result}} - {{result.location_id}}"
+  			});
+	    	var infowindow_{{result.movie_id}} = new google.maps.InfoWindow({
+  				content:"{{result.location_id}}<br>{{result.fun_facts}}"
+  			});
+
+			google.maps.event.addListener(marker_{{result.movie_id}}, 'click', function() {
+  				infowindow_{{result.movie_id}}.open(map,marker_{{result.movie_id}});
+				{% for r in result_list %}
+					{% if r.movie_id == result.movie_id %}
+					{% else %}
+						infowindow_{{r.movie_id}}.close(map,marker_{{r.movie_id}});
+					{% endif %}
+				{% endfor %}
+  			});
+		{% endif %}
+     {% endfor %}
+  {% endif %}
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/movies/">Home</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+                <li><a href="{% url 'da' %}">Search</a></li>
+                        <li><a href="{% url 'data' %}">Movies</a></li>
+                        <li><a href="{% url 'about' %}">About</a></li>
+
+              </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+                {% block side_block %}{% endblock %}
+
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+           <div>
+                {% block body_block %}
+				<div class="row">
+
+        		<div class="panel panel-primary">
+            	<br/>
+
+            		<form class="form-inline" id="user_form" method="post" action="{% url 'da' %}">
+                	{% csrf_token %}
+                		<!-- Display the search form elements here -->
+						<div class="ui-widget">
+                		<input class="form-control" type="text" size="50" name="query" value="" id="query" />
+<script>
+  $(function($) {
+    var availableMovies = [];
+  	{% if movie_list %}
+     {% for movie in movie_list %}
+    	availableMovies.push("{{movie}}");
+	 {% endfor %}
+	{% endif %}
+	$("#query").autocomplete({ source: availableMovies });
+  });
+  </script>	
+						</div>
+                		<input class="btn btn-primary" type="submit" name="submit" value="Search" />
+                		<br />
+            		</form>
+            		<div class="panel">
+                	</div>
+            	</div>
+					<br />
+					{% if unique_titles %}
+					  {% for title in unique_titles %}
+						<ul>
+							<li><a href="http://www.imdb.com/find?s=tt&q={{title}}">{{title}}</a></li>
+						</ul>
+					  {% endfor %}
+					{% endif %}
+				</div>
+    			<div id="map-canvas"></div>
+				{% endblock %}
+                </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+    <script src="http://getbootstrap.com/assets/js/docs.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>

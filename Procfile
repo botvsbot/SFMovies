@@ -1,0 +1,1 @@
+web: gunicorn SFMovies.wsgi --log-file -

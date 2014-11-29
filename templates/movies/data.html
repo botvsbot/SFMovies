@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Movies Table{% endblock %}
+{% block body_block %}
+    <div class="page-header">
+        <h1>List of movies filmed in SF</h1>
+		</div>
+            <div>
+            <p></strong>.</p>
+        		Please find the list of all movies filmed in SF below.
+            </div>
+        <p></strong></p>
+
+		{% if movies %}
+            <ul>
+                {% for movie in movies %}
+                <li>{{ movie}}</li>
+                {% endfor %}
+            </ul>
+		{% else %}
+            <strong>There are no movies present.</strong>
+        {% endif %}
+        {% if test %}
+			<ul>
+                {% for t in test %}
+                <li>{{ t }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+{% endblock %}
