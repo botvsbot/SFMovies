@@ -23,4 +23,4 @@ Strong background in Python; Beginner in Django and Javascript.
 Known issues/Things to do:
 Clean up unicode characters ()
 App currently populates lat/lng by querying google maps location api from client side. Need to modify it to query from server side.
-Enable automatic update of the AWS database by periodically scrapping the data from DataSF
+Enable automatic update of the AWS database by periodically scrapping the data from DataSF.
