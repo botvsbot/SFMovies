@@ -7,6 +7,7 @@ Focussed on Full Stack - Primarily used Python Django for the backend and Javasc
 
 The app is deployed at the following link: http://salty-dawn-5939.herokuapp.com/movies/
 
+
 Technical specs:
 
 Backend - Python Django
@@ -17,15 +18,18 @@ Frontend - Javascript, HTML and Twitter Bootstrap front-end framework
 
 Production/Deployment - AWS for the database and heroku for deployment
 
+
 Features:
 
 Autocomplete search box for movies
 
 Tooltip on all the map-markers (activated upon click), with information regarding the address and some trivia about the place
 
+
 Learning curve:
 
 Strong background in Python; Beginner in Django and Javascript.
+
 
 Known issues/Things to do:
 
