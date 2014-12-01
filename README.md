@@ -35,3 +35,4 @@ The app is deployed at the following link: http://salty-dawn-5939.herokuapp.com/
 * App currently populates lat/lng by querying google maps location api from client side. Need to modify it to query from server side.
 * Enable automatic update of the AWS database by periodically scrapping the data from DataSF.
 * The home page is http://salty-dawn-5939.herokuapp.com/movies and not the root link. Need to make modifications to the urls.py file to make sure the root link is redirected to home page.
+* Write more test coverage
