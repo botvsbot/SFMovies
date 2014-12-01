@@ -20,6 +20,7 @@ The app is deployed at the following link: http://salty-dawn-5939.herokuapp.com/
 
 * Autocomplete search box for movies
 * Partial search on movie names list all movie names and also drops a market in the map for all movies that match the search
+* Hover over the marker to see the corresponding movie name and location
 * Tooltip on all the map-markers (activated upon click), with information regarding the address and some trivia about the place(fun facts)
 
 
