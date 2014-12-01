@@ -19,12 +19,13 @@ The app is deployed at the following link: http://salty-dawn-5939.herokuapp.com/
 **Features:**
 
 * Autocomplete search box for movies
-* Tooltip on all the map-markers (activated upon click), with information regarding the address and some trivia about the place
+* Partial search on movie names list all movie names and also drops a market in the map for all movies that match the search
+* Tooltip on all the map-markers (activated upon click), with information regarding the address and some trivia about the place(fun facts)
 
 
-**Learning curve:**
+**Learning curve/Experience:**
 
-* Strong background in Python; Beginner in Django and Javascript.
+* I have quite a strong background in Python. But havent worked completely on a full-blown app. Have a beginner level experience in Django and no exprerience with Javascript and HTML/CSS. Did not use Backbone.js for the front-end as I found pretty good documentation for Django-JS/HTML communication online and just went with that. Finally, used the Twitter bootstrap for CSS-ing and presenting a nice and clean UI. Also, this was my first time integrating heroku and AWS with Python Django.
 
 
 **Known issues/Things to do:**
@@ -32,3 +33,4 @@ The app is deployed at the following link: http://salty-dawn-5939.herokuapp.com/
 * Clean up unicode characters (tilde and ampersand)
 * App currently populates lat/lng by querying google maps location api from client side. Need to modify it to query from server side.
 * Enable automatic update of the AWS database by periodically scrapping the data from DataSF.
+* The home page is http://salty-dawn-5939.herokuapp.com/movies and not the root link. Need to make modifications to the urls.py file to make sure the root link is redirected to home page.
