@@ -57,5 +57,5 @@ def add_data(movie_id, title, release_year, location_id, fun_facts, producer, di
 
 # Start execution here!
 if __name__ == '__main__':
-	print "Starting food truck population script..."
+	print "Starting SFMovies population script..."
 	populate()
